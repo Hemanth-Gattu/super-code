@@ -9,15 +9,15 @@ class Stack {
     Stack() {
       top = -1;
       size = 1000;
-      arr = new int[size];
+      arr = new int[size];//intialise array size
     }
   void push(int x) {
-    top++;
-    arr[top] = x;
+    top++;//ctr for topmost element
+    arr[top] = x;//store at top
   }
   int pop() {
-    int x = arr[top];
-    top--;
+    int x = arr[top];//store topmost element
+    top--;//decrease counter for top
     return x;
   }
   int Top() {
