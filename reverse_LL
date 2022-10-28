@@ -1,0 +1,60 @@
+#include <iostream>
+
+using namespace std;
+ class Node{
+     public:
+      int data;
+      Node *next;
+  };
+  
+  void add(Node *head, int val){
+      while(head->next!=NULL){
+          head = head->next;
+      }
+      Node* temp = new Node();
+      temp->data = val;
+      head->next = temp;
+      temp->next = NULL;
+  }
+  void reverse(Node* &head){
+      Node* prev = NULL;
+      Node* agla = NULL;
+      Node* curr = head;
+      while(curr!=NULL){
+          agla = curr->next;
+          curr->next = prev;
+          prev = curr;
+          curr = agla;
+      }
+      head = prev;
+  }
+  Node* recurse(Node* head){
+      if(head == NULL || head->next == NULL){
+          return head;
+      }
+      Node* newHead = recurse(head->next);
+      head->next->next = head;
+      head->next = NULL;
+      return newHead;
+  }
+ void print(Node *n){
+     Node *temp = n;
+     while(temp!=NULL){
+         cout<<temp->data<<" ";
+         temp = temp->next;
+     }
+ }
+
+int main() {
+    
+Node *head = new Node();
+head->data = 3;
+head->next = NULL;
+add(head, 4);
+add(head, 5);
+add(head, 6);
+add(head, 7);
+//reverse(head);
+head = recurse(head);
+print(head);
+}
