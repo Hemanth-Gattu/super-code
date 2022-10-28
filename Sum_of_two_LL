@@ -1,0 +1,111 @@
+#include <iostream>
+
+using namespace std;
+
+class Node
+{
+public:
+    int data;
+    Node *next;
+};
+
+void add(Node *head, int n)
+{
+    Node *temp = new Node();
+    temp->data = n;
+    while (head->next != NULL)
+    {
+        head = head->next;
+    }
+    head->next = temp;
+    temp->next = NULL;
+}
+
+Node *reverse(Node *head)
+{
+    Node *prev = NULL;
+    Node *curr = head;
+    Node *next = NULL;
+    while (curr != NULL)
+    {
+        next = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
+    }
+    return prev;
+}
+
+Node *add(Node *first, Node *second)
+{
+    int carry = 0;
+    int sum = 0;
+    Node *temp;
+    Node *res = NULL;
+    Node *curr = NULL;
+    while (first != NULL || second != NULL)
+    {
+        sum = carry + (first ? first->data : 0) + (second ? second->data : 0);
+        if (sum >= 10)
+            carry = 1;
+        else
+            carry = 0;
+        sum = sum % 10;
+        temp = new Node();
+        temp->data = sum;
+        if (res == NULL)
+        {
+            res = temp;
+        }
+        else
+        {
+            curr->next = temp;
+        }
+        curr = temp;
+        if (first)
+            first = first->next;
+        if (second)
+            second = second->next;
+    }
+    if (carry > 0)
+    {
+        temp = new Node();
+        temp->data = carry;
+        curr->next = temp;
+        curr = temp;
+    }
+    res = reverse(res);
+    return res;
+}
+
+void print(Node *head)
+{
+    while (head != NULL)
+    {
+        cout << head->data << " ";
+        head = head->next;
+    }
+    cout << endl;
+}
+
+int main()
+{
+    Node *first = new Node();
+    Node *second = new Node;
+    first->data = 5;
+    second->data = 8;
+    first->next = NULL;
+    second->next = NULL;
+    add(first, 6);
+    add(first, 3);
+    add(second, 4);
+    add(second, 2);
+    // req(head);
+    print(first);
+    print(second);
+    first = reverse(first);
+    second = reverse(second);
+    Node *res = add(first, second);
+    cout << "Sum of linked lists :" << endl;
+    print(res);
+}
