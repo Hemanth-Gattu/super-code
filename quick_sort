@@ -1,0 +1,44 @@
+#include <iostream>
+
+using namespace std;
+
+int partition(int arr[], int l, int h){
+    int i =l;
+    int j = h;
+    int pivot = arr[l];
+    while(i<j){
+        while(arr[i]<pivot){
+            i = i+1;
+        }
+        while(arr[j]>pivot){
+            j =j -1;
+        }
+        if(i<j){
+            swap(arr[i], arr[j]);
+        }
+    }
+    swap(pivot, arr[i]);
+    return j;
+}
+
+void quick(int arr[], int l, int h){
+    if(l>=h){
+        return;
+    }
+    else{
+        int pivot = partition(arr, l, h);
+        quick(arr, l, pivot-1);
+        quick(arr, pivot+1, h);
+    }
+}
+ 
+
+int main() {
+  int arr[] = {12, 11, 13, 5, 6, 7 };
+  int n = sizeof(arr)/sizeof(arr[0]);
+  
+  quick(arr, 0, n-1);
+  for(int i=0; i<n; i++){
+      cout<<arr[i]<<" ";
+  }
+}
