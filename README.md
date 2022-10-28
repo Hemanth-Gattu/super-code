@@ -9,5 +9,6 @@ CKPK Members:
 3) Have fun!
 
 @ak_abinav, you are expected of high quality memes.
+@ak_abhinav is a noob when it comes to memes, @akarshitkverma please allocate responsibilites accordingly
 
 @abhijeet please add boomer comments with each PR.
