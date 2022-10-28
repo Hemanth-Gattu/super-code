@@ -1,0 +1,136 @@
+#include <iostream>
+
+using namespace std;
+
+class Node
+{
+public:
+    char data;
+    Node *next;
+};
+
+void add(Node *head, int n)
+{
+    Node *temp = new Node();
+    temp->data = n;
+    while (head->next != NULL)
+    {
+        head = head->next;
+    }
+    head->next = temp;
+    temp->next = NULL;
+}
+
+void palindrome(Node *head)
+{
+    Node *slow = head;
+    Node *fast = head;
+    Node *ptr = head;
+    int sum = 0;
+    while (ptr != NULL)
+    {
+        ptr = ptr->next;
+        sum = sum + 1;
+    }
+    Node *evenmiddle = NULL;
+    while (fast != NULL && fast->next != NULL)
+    {
+        evenmiddle = slow;
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+    Node *middle = slow;
+    Node *temp = head;
+    if (sum % 2 != 0)
+    {
+        slow = slow->next;
+        Node *agla = NULL;
+        Node *prev = NULL;
+        while (slow != NULL)
+        {
+            agla = slow->next;
+            slow->next = prev;
+            prev = slow;
+            slow = agla;
+        }
+        Node *temp1 = head;
+        while (temp1 != middle)
+        {
+            if (temp1->data == prev->data)
+            {
+                temp1 = temp1->next;
+                prev = prev->next;
+            }
+            else
+            {
+                cout << "No palindrome";
+                break;
+            }
+        }
+        if (temp1 == middle)
+        {
+            cout << " yes palindrome";
+        }
+    }
+    else
+    {
+        Node *agla = NULL;
+        Node *prev = NULL;
+        while (slow != NULL)
+        {
+            agla = slow->next;
+            slow->next = prev;
+            prev = slow;
+            slow = agla;
+        }
+        Node *temp1 = head;
+        while (temp1 != middle)
+        {
+            if (temp1->data == prev->data)
+            {
+                temp1 = temp1->next;
+                prev = prev->next;
+            }
+            else
+            {
+                cout << "No palindrome";
+                break;
+            }
+        }
+        if (temp1 == middle)
+        {
+            cout << " yes palindrome";
+        }
+    }
+}
+
+void print(Node *head)
+{
+    while (head != NULL)
+    {
+        cout << head->data << " ";
+        head = head->next;
+    }
+}
+
+int main()
+{
+    Node *head = new Node();
+    char str[] = "abacaba";
+    head->data = str[0];
+    head->next = NULL;
+    int i;
+    for (i = 1; str[i] != '\0'; i++)
+    {
+        add(head, str[i]);
+    }
+    /*add(head, 2);
+    add(head, 3);
+    add(head, 4);
+    add(head, 3);
+    add(head, 2);
+    add(head, 1);*/
+    print(head);
+    cout << endl;
+    palindrome(head);
+}
